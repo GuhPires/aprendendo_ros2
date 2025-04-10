@@ -13,17 +13,17 @@ def generate_launch_description():
     map_arg = DeclareLaunchArgument(
         name='map', default_value='')
 
-    simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('pacote_de_exemplos'), '/launch/simulation.launch.py']),
-           launch_arguments={
-                'world_path': [get_package_share_directory('pacote_de_exemplos'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
-            }.items(),
-    )
+    # simulation = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource([get_package_share_directory('pacote_de_exemplos'), '/launch/simulation.launch.py']),
+    #        launch_arguments={
+    #             'world_path': [get_package_share_directory('pacote_de_exemplos'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
+    #         }.items(),
+    # )
 
     load_robot = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory('packo_description'),'/launch/robot.launch.py']),
         launch_arguments={
-            'rviz_config': [get_package_share_directory('robot_spatial'), '/rviz/navigation.rviz'],
+            'rviz_config': [get_package_share_directory('packo_spatial'), '/rviz/navigation.rviz'],
         }.items()
    
     )
@@ -37,7 +37,7 @@ def generate_launch_description():
             'slam': 'False',
             'map': LaunchConfiguration('map'),
             'use_sim_time': 'True',
-            'params_file': [get_package_share_directory('robot_spatial'),'/config/navigation.yaml'],
+            'params_file': [get_package_share_directory('packo_spatial'),'/config/navigation.yaml'],
             'autostart': 'True',
             'use_composition': 'True',
             'use_respawn': 'False'
@@ -49,7 +49,7 @@ def generate_launch_description():
 
     ld = LaunchDescription()
     ld.add_action(map_arg)
-    ld.add_action(simulation)
+    # ld.add_action(simulation)
     ld.add_action(load_robot)
     ld.add_action(bringup_cmd)
     return ld

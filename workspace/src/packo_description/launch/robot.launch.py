@@ -25,7 +25,7 @@ def generate_launch_description():
         output='log',
         parameters=[{
             'use_sim_time': True, 
-            'packo_description': packo_description
+            'robot_description': packo_description
         }],
         remappings=[
             ('/tf', 'tf'),
@@ -60,7 +60,7 @@ def generate_launch_description():
     	executable='spawn_entity.py',
         arguments=[
             '-entity', 'robot', 
-            '-topic', 'packo_description'
+            '-topic', 'robot_description'
         ]
     )
     
